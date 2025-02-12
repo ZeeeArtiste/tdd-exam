@@ -48,6 +48,27 @@ describe('solveNQueensClassic for n=4', () => {
       });
     });
   });
-    
+
+  it('no two queens should attack each other', () => {
+    const solutions = solveNQueensClassic(4);
+    solutions.forEach(board => {
+      // Récupérer les positions des reines
+      const queens = board.map((row, rowIndex) => ({
+        row: rowIndex,
+        col: row.indexOf('#')
+      }));
+      // Vérifier que pour chaque paire de reines, elles ne sont pas en conflit
+      for (let i = 0; i < queens.length; i++) {
+        for (let j = i + 1; j < queens.length; j++) {
+          const q1 = queens[i];
+          const q2 = queens[j];
+          // Vérifier que les reines ne sont pas sur la même colonne ou diagonale
+          const sameCol = q1.col === q2.col;
+          const sameDiag = Math.abs(q1.row - q2.row) === Math.abs(q1.col - q2.col);
+          expect(sameCol || sameDiag).toBe(false);
+        }
+      }
+    });
+  });
 });
   
