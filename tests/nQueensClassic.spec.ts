@@ -7,3 +7,8 @@ describe('solveNQueensClassic', () => {
     expect(solutions).toEqual([["#"]]);
   });
 });
+
+it('should return [] for n=2 (no solution)', () => {
+    const solutions = solveNQueensClassic(2);
+    expect(solutions).toEqual([]);
+  });
