@@ -3,8 +3,8 @@ export function solveNQueensClassic(n: number): string[][] {
       return [["#"]];
     }
 
-    // No solution for n=2
-    if (n === 2) {
+    // No solution for n=2 or n=3
+    if (n === 2 || n === 3) {
         return [];
       }
 
