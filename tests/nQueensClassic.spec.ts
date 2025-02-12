@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { solveNQueensClassic } from '../src/nQueensClassic';
-
+import { solveNQueensClassic, convertBoard,  isValid} from '../src/nQueensClassic';
 describe('solveNQueensClassic', () => {
     it('should return a board with one queen for n=1', () => {
         const solutions = solveNQueensClassic(1);
@@ -16,6 +15,52 @@ describe('solveNQueensClassic', () => {
         const solutions = solveNQueensClassic(3);
         expect(solutions).toEqual([]);
     });
+});
+
+describe('convertBoard', () => {
+  it('should convert a board [1,3,0,2] for n=4 into the correct string representation', () => {
+    const board = [1, 3, 0, 2];
+    const n = 4;
+    const result = convertBoard(board, n);
+    expect(result).toEqual(["O#OO", "OOO#", "#OOO", "OO#O"]);
+  });
+
+  it('should convert a board [0] for n=1 into ["#"]', () => {
+    const board = [0];
+    const n = 1;
+    const result = convertBoard(board, n);
+    expect(result).toEqual(["#"]);
+  });
+});
+
+describe('isValid', () => {
+  it('should return true for a valid placement when no queen conflicts exist', () => {
+    // Placer une reine en ligne 0 à la colonne 1
+    const board = [1];
+    // Pour row = 1, placer à la colonne 3 ne crée pas de conflit
+    expect(isValid(board, 1, 3)).toBe(true);
+  });
+
+  it('should return false when placing a queen in the same column as an existing queen', () => {
+    // Placer une reine en ligne 0 à la colonne 1
+    const board = [1];
+    // Pour row = 1, placer à la colonne 1 (même colonne) est invalide
+    expect(isValid(board, 1, 1)).toBe(false);
+  });
+
+  it('should return false when placing a queen on the same diagonal as an existing queen', () => {
+    // Placer une reine en ligne 0 à la colonne 1
+    const board = [1];
+    // Pour row = 1, placer à la colonne 0 est en diagonale avec la reine de (0,1)
+    expect(isValid(board, 1, 0)).toBe(false);
+  });
+
+  it('should return true for a known valid configuration', () => {
+    // Pour le tableau partiel d'une solution valide de n=4: [1, 3, 0] (lignes 0 à 2)
+    const board = [1, 3, 0];
+    // Pour row = 3, placer à la colonne 2 est valide (la solution complète étant [1, 3, 0, 2])
+    expect(isValid(board, 3, 2)).toBe(true);
+  });
 });
 
 describe('solveNQueensClassic for n=4', () => {
@@ -70,5 +115,7 @@ describe('solveNQueensClassic for n=4', () => {
       }
     });
   });
+
+  
 });
   

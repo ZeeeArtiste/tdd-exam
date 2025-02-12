@@ -29,17 +29,19 @@ function solveNQueensBacktracking(n: number): string[][] {
   }
 
   backtrack(0);
+  console.log(solutions);
+  
   return solutions;
 }
   
 // Convertit un tableau de colonnes en un tableau de chaînes de caractères
-function convertBoard(board: number[], n: number): string[] {
+export function convertBoard(board: number[], n: number): string[] {
   return board.map(col =>
     'O'.repeat(col) + '#' + 'O'.repeat(n - col - 1)
   );
 }
 
-function isValid(board: number[], row: number, col: number): boolean {
+export function isValid(board: number[], row: number, col: number): boolean {
   for (let i = 0; i < row; i++) {
       const queenCol = board[i];
       // Vérifier si la reine est sur la même colonne ou la même diagonale
