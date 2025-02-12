@@ -30,6 +30,16 @@ describe('solveNQueensClassic for n=4', () => {
       expect(board.length).toBe(4);
     });
   });
-   
+
+  it('each row should have 4 characters', () => {
+    const solutions = solveNQueensClassic(4);
+    solutions.forEach(board => {
+      board.forEach(row => {
+        expect(row).toHaveLength(4);
+      });
+    });
+  });
+  
+    
 });
   
