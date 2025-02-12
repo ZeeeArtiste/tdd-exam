@@ -23,5 +23,13 @@ describe('solveNQueensClassic for n=4', () => {
     const solutions = solveNQueensClassic(4);
     expect(solutions.length).toBe(2);
   });
+
+  it('each solution should have 4 rows', () => {
+    const solutions = solveNQueensClassic(4);
+    solutions.forEach(board => {
+      expect(board.length).toBe(4);
+    });
+  });
+   
 });
   
