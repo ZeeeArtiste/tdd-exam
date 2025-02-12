@@ -39,7 +39,15 @@ describe('solveNQueensClassic for n=4', () => {
       });
     });
   });
-  
+
+  it('each row should contain exactly one queen ("#")', () => {
+    const solutions = solveNQueensClassic(4);
+    solutions.forEach(board => {
+      board.forEach(row => {
+        expect((row.match(/#/g) || []).length).toBe(1);
+      });
+    });
+  });
     
 });
   
