@@ -2,12 +2,37 @@ export function solveNQueensClassic(n: number): string[][] {
     if (n === 1) {
       return [["#"]];
     }
-
-    // No solution for n=2 or n=3
     if (n === 2 || n === 3) {
-        return [];
+      return [];
+    }
+    
+    // Pour n>=4, utiliser le backtracking
+    return solveNQueensBacktracking(n);
+  }
+  
+  function solveNQueensBacktracking(n: number): string[][] {
+    const solutions: string[][] = [];
+    const board: number[] = [];
+  
+    function backtrack(row: number) {
+      if (row === n) {
+        solutions.push(convertBoard(board, n));
+        return;
       }
-
-    return [];
+      for (let col = 0; col < n; col++) {
+        board[row] = col;
+        backtrack(row + 1);
+      }
+    }
+  
+    backtrack(0);
+    return solutions;
+  }
+  
+  // Convertit un tableau de colonnes en un tableau de chaînes de caractères
+  function convertBoard(board: number[], n: number): string[] {
+    return board.map(col =>
+      'O'.repeat(col) + '#' + 'O'.repeat(n - col - 1)
+    );
   }
   
